@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cenoteka Crawler</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link rel="shortcut icon" href="{{url_for('static', filename='images/favicon.ico')}}" type="image/x-icon">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container">
+            <img  class="navbar-brand" src="{{url_for('static', filename='images/logo-white.png')}}" />
+            <form class="form-inline" method="POST">
+                <input class="form-control mr-sm-2" type="text" name="url" placeholder="Pretraži URL">
+                <button class="btn btn-outline-dark text-white" type="submit">Crawl</button>
+            </form>
+        </div>
+    </nav>
+
+    <header class="container">
+        <img src="{{url_for('static', filename='images/header-image.jpg')}}" />
+    </header>
+    <section id="content-container">
+        <div id="main">
+            <h3 class="page-heading">Cenoteka Crawler izdvaja za vas</h3>
+            <article class="products">
+            {% if not proizvodi %}
+                <h5>Morate upisati URL kategorije sa <a href="https://cenoteka.rs/" target="_blank">ovog</a> sajta.</h5>
+            {% else %}
+                <div class="row">
+                    {% for proizvod in proizvodi %}
+                        <div class="col-md-4">
+                            <div class="card mb-2">
+                                <img class="card-img-top" width="100" src="{{proizvod.slika}}" />
+                                <div class="card-body">
+                                    <h4 class="card-title">{{proizvod.naziv}}</h4>
+                                    <h6 class="card-text">Proizvodjac: {{proizvod.proizvodjac}}</h6>
+                                    <h6 class="card-text">Količina i jedinica mere: {{proizvod.kolicina}}</h6>
+                                    <a class="btn btn-outline-dark" href="{{proizvod.url}}" target="_blank">Detalji</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            </article>
+        </div>
+        <aside id="sidebar">
+                <div class="aside-heading">
+                    <h4>Zapratite me</h4>
+                </div>
+                <div class="social-icons">
+                    <div class="social-icon">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    </div>
+                    <div class="social-icon">
+                        <a href="https://www.instagram.com/ilicnemanjaaa/" target="_blank"><i class="fab fa-instagram"></i></a>
+                    </div>
+                    <div class="social-icon">
+                        <a href="https://www.linkedin.com/in/nemanja-ili%C4%87-b018a61ba/" target="_blank"><i class="fab fa-linkedin-in"></i></i></a>
+                    </div>
+                </div>
+
+                <div class="aside-heading add-10mt">
+                    <h4>Sponzori</h4>
+                </div>
+                <div class="sponsors">
+                    <div class="sponsor">
+                        <img src="{{url_for('static', filename='images/sponsors_instagram.png')}}" alt="Instagram" />
+                    </div>
+                    <div class="sponsor">
+                        <img src="{{url_for('static', filename='images/sponsors_linkedin.png')}}" alt="LinkedIn" />
+                    </div>
+                    <div class="sponsor">
+                        <img src="{{url_for('static', filename='images/sponsors_netflix.png')}}" alt="Netflix" />
+                    </div>
+                    <div class="sponsor">
+                        <img src="{{url_for('static', filename='images/sponsors_spotify.png')}}" alt="Spotify" />
+                    </div>
+                    <div class="sponsor">
+                        <img src="{{url_for('static', filename='images/sponsors_github.png')}}" alt="GitHub">
+                    </div>
+                </div>
+            </aside>
+    </section>
+
+
+    <footer>
+        <div class="copyright">
+            <p>Ovaj projekat je napravljen čisto u edukativne svrhe. Zabranjeno je korišćenje i preprodavanje podataka. Ne odgovaram ni za kakve postupke.</p>
+            <p>&copy; 2021 | Nemanja Ilić</p>
+        </div>
+    </footer>
+
+
+    
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
